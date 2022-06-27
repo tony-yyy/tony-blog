@@ -1,0 +1,62 @@
+<script>
+    function getUrlParam(name) {
+        //构造一个含有目标参数的正则表达式对象
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) {
+            return unescape(r[2]);
+        } else {
+            return null; //返回参数值
+        }
+    }
+
+    $(function () {
+        var page = getUrlParam("page");
+        $("#page_" + page).addClass("active");
+    })
+
+    $(function () {
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-show');
+
+        });
+
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+
+        });
+
+        $('.ui.dropdown').dropdown({
+            on : 'hover'
+        });
+    })
+
+
+</script>
+<!--导航栏-->
+<nav  class="ui inverted gird-header" >
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <a href="/admin"><h2 class="ui olive header item" style="font-family: STSong">管理后台</h2></a>
+            <a href="/admin/blogs.html?page=blogs" id="page_blogs" class=" m-item item m-mobile-hide"><i class="home icon"></i>文章管理</a>
+            <a href="/admin/types.html?page=types" id="page_types" class=" m-item item m-mobile-hide"><i class="clone outline icon"></i>分类管理</a>
+            <a href="/admin/pictures.html?page=pictures" id="page_pictures" class=" m-item item m-mobile-hide"><i class="image icon"></i>相册管理</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown  item">
+                    <div class="text">
+                        <img class="ui avatar image" src="/images/avatar.jpg" >
+                        <span>Tony</span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="/admin/logout"  class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:void(0)" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类管理</title>
+    <base href="/">
+    <script src="lib/vue/vuejs-2.5.16.js" type="text/javascript"></script>
+    <script src="lib/vue/axios-0.18.0.js" type="text/javascript"></script>
+    <link href="images/favicon.ico" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="lib/semantic/dist/semantic.min.css" >
+    <link rel="stylesheet" href="css/me.css" >
+
+</head>
+<body>
+
+<!--导航-->
+<div id="admin_navigate"></div>
+<div class="m-padded-tb-hugex">
+  <div class="ui attached pointing menu">
+    <div class="ui container">
+      <div class="right menu">
+        <a href="/admin/types-input.html?page=types"  class="item">新增</a>
+        <a href="javascript:void(0)" class="teal active item">列表</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+  <!--中间内容-->
+  <div id="typesContext" class="m-padded-tb-big">
+    <div class="ui container">
+      <div class="ui success message" >
+        <i class="close icon"></i>
+        <div>{{ message }}</div>
+      </div>
+      <table class="ui compact teal table">
+        <thead>
+          <tr align="center">
+            <th>ID</th>
+            <th>名称</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr align="center" v-for="(type, index) in pageBean.records">
+            <td>{{ type.id }}</td>
+            <td>{{ type.name }}</td>
+            <td>
+              <a v-bind:href="'/admin/types-input.html?page=types&id=' + type.id" class="ui mini teal basic button">编辑</a>
+              <input type="button" href="#" v-on:click="deleteType(type.id)" class="ui mini red basic button" value="删除">
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="6" >
+              <div class="ui inverted divided stackable grid">
+                <div class="three wide column" align="center">
+                  <a class="item" v-on:click="prePage()" >上一页</a>
+                </div>
+
+                <div class="ten wide column" align="center">
+                  <p>第 {{ pageBean.current }} 页，共 {{ Math.ceil(pageBean.total / pageBean.size) }} 页，共有 {{ pageBean.total }} 个分类</p>
+                </div>
+
+                <div class="three wide column" align="center">
+                  <a class="item" v-on:click="nextPage()">下一页</a>
+                </div>
+              </div>
+              <div align="center">
+              <a href="#">
+                <a href="/admin/types-input.html?page=types" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>新增</a>
+              </a>
+              </div>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+
+
+  <br>
+  <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<script src="lib/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+<script src="lib/semantic/dist/semantic.min.js"></script>
+<script src="lib/commons/commons.js" type="text/javascript"></script>
+<script src="lib/admin/types.js" type="text/javascript"></script>
+  <script>
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+      on : 'hover'
+    });
+
+    //消息提示关闭初始化
+    $('.message .close')
+      .on('click', function () {
+        $(this)
+          .closest('.message')
+          .transition('fade');
+      });
+  </script>
+
+</body>
+</html>
