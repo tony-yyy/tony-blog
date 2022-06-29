@@ -41,6 +41,8 @@ import java.util.zip.ZipOutputStream;
 @RequestMapping(value = "/pictures", produces = "application/json;charset=UTF-8")
 public class PicturesController {
     public final static String diskDir = "D:\\cloudDisk\\files\\";
+//    public final static String diskDir = "/usr/cloudDisk/files/"; // linux
+
     @Autowired
     PicturesService picturesService;
 //    @Autowired

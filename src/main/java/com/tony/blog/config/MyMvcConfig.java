@@ -16,6 +16,10 @@ public class MyMvcConfig implements WebMvcConfigurer {
     //设置文件虚拟路径映射
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+/*        registry.addResourceHandler("/cloudDisk/file/**").addResourceLocations("file:/usr/cloudDisk/files/");
+        registry.addResourceHandler("/cloudDisk/phonePhotos/**").addResourceLocations("file:/usr/cloudDisk/phonePhotos/");
+        registry.addResourceHandler("/cloudDisk/avatar/**").addResourceLocations("file:/usr/cloudDisk/avatar/");
+        registry.addResourceHandler("/cloudDisk/markdown/**").addResourceLocations("file:/usr/cloudDisk/markdown/");*/
         registry.addResourceHandler("/cloudDisk/file/**").addResourceLocations("file:D:\\cloudDisk\\files\\");
         registry.addResourceHandler("/cloudDisk/phonePhotos/**").addResourceLocations("file:G:\\cloudDisk\\phonePhotos\\");
         registry.addResourceHandler("/cloudDisk/avatar/**").addResourceLocations("file:D:\\cloudDisk\\avatar\\");

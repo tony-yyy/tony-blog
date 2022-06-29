@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BlogMapper extends BaseMapper<Blog> {
-    @Update("UPDATE blog SET blog.`comment_count` = (SELECT COUNT(1) FROM COMMENT WHERE comment.`blog_id` = #{id})  WHERE blog.id = #{id}")
+    @Update("UPDATE blog SET blog.`comment_count` = (SELECT COUNT(1) FROM comment WHERE comment.`blog_id` = #{id})  WHERE blog.id = #{id}")
     void updateCommentCount(@Param("id") Integer id);
     @Update("UPDATE blog SET blog.`views` = blog.`views` + 1 WHERE blog.id = #{id}")
     void updateViews(@Param("id") Integer id);

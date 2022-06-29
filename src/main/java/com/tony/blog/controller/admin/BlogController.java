@@ -20,6 +20,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/admin", produces = "application/json;charset=utf-8")
 public class BlogController {
+    public static String filePath = "D:\\cloudDisk\\markdown\\";
+//    public static String filePath = "/usr/cloudDisk/markdown/"; // linux
+
     Logger logger = LoggerFactory.getLogger(BlogController.class);
     @Autowired
     BlogService blogService;
@@ -36,7 +39,7 @@ public class BlogController {
             String saveFileName = new SimpleDateFormat("yyyyMMddHHmmss")
                     .format(new Date()) +"_"+ UUID.randomUUID().toString()
                     .replace("-","").substring(0, 8) +"_"+ realFileName;
-            File filePath = new File("D:\\cloudDisk\\markdown\\");
+            File filePath = new File(BlogController.filePath);
             if (!filePath.exists()) {
                 filePath.mkdirs();
             }

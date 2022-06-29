@@ -32,7 +32,7 @@ public interface PicturesMapper extends BaseMapper<Pictures> {
             "            AND isRecycle = 0\n" +
             "        GROUP BY\n" +
             "            date\n" +
-            "        order by uploadTime desc")
+            "        order by date desc")
     List<PicturesDates> getPicturesDates(@Param("isPublic") int isPublic);
 
     @Select("        SELECT *\n" +
