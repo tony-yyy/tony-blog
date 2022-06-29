@@ -8,6 +8,8 @@ import com.tony.blog.pojo.PicturesDates;
 import com.tony.blog.pojo.ResultInfo;
 import com.tony.blog.pojo.User;
 import com.tony.blog.service.PicturesService;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.tasks.UnsupportedFormatException;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.apache.velocity.shaded.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,6 +166,8 @@ public class PicturesController {
             String ext = FilenameUtils.getExtension(file.getOriginalFilename());
             //生成新的文件名称
             String saveFileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +"_"+ UUID.randomUUID().toString().replace("-","") +"_"+ realFileName;
+            // 缩略图名字
+            String thumbnail = "270x270" + saveFileName;
             //设置文件上传路径
             String path = diskDir;
 //            /cloudDisk/file/
@@ -177,11 +181,20 @@ public class PicturesController {
                 filepath.mkdirs();
             }
             //上传文件
-            file.transferTo(new File(path+saveFileName)); //核心上传方法
+            File save = new File(path + saveFileName);
+            file.transferTo(save); //核心上传方法
+            try {
+                Thumbnails.of(save)
+                        .size(270, 270)
+                        .toFile(new File(path + thumbnail));
+            }catch (UnsupportedFormatException e){
+                thumbnail = null;
+            }
             //将文件信息保存数据库
             Pictures pictures = new Pictures();
             pictures.setRealfilename(realFileName);
             pictures.setSavefilename(saveFileName);
+            pictures.setThumbnail(thumbnail);
             pictures.setExt(ext);
             pictures.setDir("/cloudDisk/file/");
             pictures.setSize(size);
@@ -284,8 +297,10 @@ public class PicturesController {
         Pictures delfile = picturesService.findFileById(fileId);
         //创建删除文件对象
         File file = new File(diskDir, delfile.getSavefilename());
+        File thumbnailFile = new File(diskDir, delfile.getThumbnail());
         //进行删除
         if (file.exists())file.delete();
+        if (thumbnailFile.exists())file.delete();
         picturesService.deleteFileById(delfile);
         return "redirect:/";
     }

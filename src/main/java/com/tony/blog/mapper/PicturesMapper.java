@@ -51,12 +51,12 @@ public interface PicturesMapper extends BaseMapper<Pictures> {
             "            realFileName,\n" +
             "            saveFileName,\n" +
             "            ext, dir, size,\n" +
-            "            TYPE, isimg, userId)\n" +
+            "            TYPE, isimg, userId, thumbnail)\n" +
             "        VALUES(\n" +
             "            #{pictures.realfilename},\n" +
             "            #{pictures.savefilename},\n" +
             "            #{pictures.ext}, #{pictures.dir}, #{pictures.size},\n" +
-            "            #{pictures.type}, #{pictures.isimg}, #{pictures.userid}\n" +
+            "            #{pictures.type}, #{pictures.isimg}, #{pictures.userid}, #{pictures.thumbnail}\n" +
             "        )")
     void uploadFiles(@Param("pictures") Pictures pictures);
 

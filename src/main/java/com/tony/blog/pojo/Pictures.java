@@ -77,4 +77,8 @@ public class Pictures implements Serializable {
     @TableField("userId")
     private Long userid;
 
+    @ApiModelProperty(value = "缩略图")
+    @TableField("thumbnail")
+    private String thumbnail;
+
 }

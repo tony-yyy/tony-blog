@@ -19,7 +19,8 @@ let vm = new Vue({
                     isrecycle: 0,
                     ispublic: 0,
                     downloadtimes: "",
-                    isimg: 1
+                    isimg: 1,
+                    thumbnail: ""
                 }]
             }],
             currentValue: 0,

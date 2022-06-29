@@ -94,7 +94,7 @@ W
             {{((day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].dir + day.pics[pic - 1].saveFileName): 'asa')}}-->
             <img v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 1): true" class="uk-overlay-scale uk-thumbnail-medium"
                  :style='[{height: "160px"},{backgroundSize: "cover"},{backgroundPosition: "center"},
-                              {backgroundImage: `url("` + encodeURI((day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].dir + day.pics[pic - 1].savefilename): "") + `")`}]'/>
+                              {backgroundImage: `url("` + encodeURI((day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].dir + (day.pics[pic - 1].thumbnail == null? day.pics[pic - 1].savefilename: day.pics[pic - 1].thumbnail)): "") + `")`}]'/>
             <video v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 0): false" class="uk-overlay-scale uk-thumbnail-medium" crossorigin="anonymous"
                    controlslist="nodownload" preload="Metadata" style="height: 160px;
                        background-size: cover; background-position: center; background-image: url('images/playBg.png')">
