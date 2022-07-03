@@ -11,12 +11,15 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 
 
+/*
 @Configuration
 public class DruidConfig {
-    /* 将自定义的 Druid数据源添加到容器中，不再让 Spring Boot 自动创建
+    */
+/* 将自定义的 Druid数据源添加到容器中，不再让 Spring Boot 自动创建
    绑定全局配置文件中的 druid 数据源属性到 com.alibaba.druid.pool.DruidDataSource从而让它们生效
    @ConfigurationProperties(prefix = "spring.datasource")：作用就是将 全局配置文件中
-   前缀为 spring.datasource的属性值注入到 com.alibaba.druid.pool.DruidDataSource 的同名参数中*/
+   前缀为 spring.datasource的属性值注入到 com.alibaba.druid.pool.DruidDataSource 的同名参数中*//*
+
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druidDataSource(){
@@ -32,7 +35,7 @@ public class DruidConfig {
         HashMap<String, String> initParameters = new HashMap<>();
         // 增加配置
         initParameters.put("loginUsername", "tony"); // 登录key，时固定的loginUsername、loginPassword
-        initParameters.put("loginPassword", "qweqweqwe123");
+        initParameters.put("loginPassword", "123456");
         // 允许谁可以访问
 //        initParameters.put("allow", "127.0.0.1");
         // 禁止谁能访问
@@ -43,3 +46,4 @@ public class DruidConfig {
     }
 
 }
+*/

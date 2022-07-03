@@ -4,6 +4,8 @@ layui.use(['upload', 'element', 'layer'], function(){
         ,element = layui.element
         ,layer = layui.layer;
 
+
+
     //常规使用 - 普通图片上传
     var uploadInst = upload.render({
         elem: '#test1'
@@ -70,7 +72,6 @@ layui.use(['upload', 'element', 'layer'], function(){
                     ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
                     ,'<td><div class="layui-progress" lay-filter="progress-demo-'+ index +'"><div class="layui-progress-bar" lay-percent=""></div></div></td>'
                     ,'<td>'
-                    ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
                     ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
                     ,'</td>'
                     ,'</tr>'].join(''));
@@ -93,14 +94,20 @@ layui.use(['upload', 'element', 'layer'], function(){
         }
         ,done: function(res, index, upload){ //成功的回调
             var that = this;
-            if(res.flag == true){ //上传成功
+            if(res.data == true){ //上传成功
                 var tr = that.elemList.find('tr#upload-'+ index)
                     ,tds = tr.children();
                 tds.eq(3).html('success'); //清空操作
                 delete this.files[index]; //删除文件队列已经上传成功的文件
+                $("#clearList").css("display", "");
+                $("#clearList").click(function (){
+                    $("#demoList").html("");
+                    $("#clearList").css("display", "none");
+                });
                 return;
+            }else {
+                this.error(index, upload);
             }
-            this.error(index, upload);
         }
         ,allDone: function(obj){ //多文件上传完毕后的状态回调
             console.log(obj)
@@ -110,11 +117,12 @@ layui.use(['upload', 'element', 'layer'], function(){
             var tr = that.elemList.find('tr#upload-'+ index)
                 ,tds = tr.children();
             tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
-            layer.msg("请检查空间是否已满")
+            layer.msg("上传错误！")
         }
         ,progress: function(n, elem, e, index){ //注意：index 参数为 layui 2.6.6 新增
             element.progress('progress-demo-'+ index, n + '%'); //执行进度条。n 即为返回的进度百分比
         }
     });
+
 
 });

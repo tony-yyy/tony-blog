@@ -209,7 +209,7 @@ var album = new Vue({
             fileDetailDisplay.$set(fileDetailDisplay, "currentFileDetail", this.vm.sliderInfo.axiosResponse[index].pics[pic])
             fileDetailDisplay.isDisplay = true;
             fileDetailDisplay.curIndex = index;
-            fileDetailDisplay.pic = pic;
+            fileDetailDisplay.curPic = pic;
         }
     },
 })
@@ -336,6 +336,47 @@ var fileDetailDisplay = new Vue({
         closeInfoDetail: function () {
             this.isDisplayDetail = false
         },
+        getPrePic: function() {
+            var dates = vm.sliderInfo.axiosResponse; // 每天的图片
+            if (this.curPic == 0 && this.curIndex != 0){
+                // 当前图片在第一个，之前还有日期
+                if (dates[this.curIndex - 1].pics == null){
+                    album.loadImageByData([this.curIndex - 1]);
+                    return;
+                }
+                this.curIndex = this.curIndex - 1;
+                this.curPic = dates[this.curIndex].pics.length - 1;
+            }else if (this.curPic == 0 && this.curIndex == 0){
+                // 当前是第一张图片
+                alert("没有更多图片了~")
+                return;
+            }else {
+                this.curPic = this.curPic - 1;
+            }
+            this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
+        },
+        getNextPic: function () {
+            var dates = vm.sliderInfo.axiosResponse; // 每天的图片
+            console.log(dates[this.curIndex].pics)
+            console.log(dates[this.curIndex].pics.length)
+            if (dates[this.curIndex].pics == null) return;
+            if (dates[this.curIndex].pics.length - 1 == this.curPic && this.curIndex != dates.length - 1){
+                // 当前图片在当日最后一张，之后还有日期
+                if (dates[this.curIndex + 1].pics == null){
+                    album.loadImageByData([this.curIndex + 1]);
+                    return;
+                }
+                this.curIndex = this.curIndex + 1;
+                this.curPic = 0;
+            }else if (dates[this.curIndex].pics.length - 1 == this.curPic && this.curIndex == dates.length - 1){
+                // 当前是第一张图片
+                alert("没有更多图片了~")
+                return;
+            }else {
+                this.curPic = this.curPic + 1;
+            }
+            this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
+        }
     },
 })
 
