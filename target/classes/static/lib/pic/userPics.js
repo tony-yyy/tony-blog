@@ -302,9 +302,10 @@ var fileDetailDisplay = new Vue({
             }else {
                 this.curPic = this.curPic - 1;
             }
-            // $(".img-3Ae3U").attr("src", "/images/loading1.gif");
-            $(".img-3Ae3U").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
+            $("#imgDisplay").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
             this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
+            if (document.getElementById("video") != null)
+                document.getElementById("video").load();
         },
         getNextPic: function () {
             var dates = vm.sliderInfo.axiosResponse; // 每天的图片
@@ -324,9 +325,10 @@ var fileDetailDisplay = new Vue({
             }else {
                 this.curPic = this.curPic + 1;
             }
-            $(".img-3Ae3U").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
-            // this.currentFileDetail.saveFileName = dates[this.curIndex].pics[this.curPic].thumbnail;
+            $("#imgDisplay").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
             this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
+            if (document.getElementById("video") != null)
+                document.getElementById("video").load();
         }
     },
 })

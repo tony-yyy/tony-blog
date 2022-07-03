@@ -159,9 +159,9 @@
         <div v-on:click="displayDetail" class="item-18bd6 iconfont-1MKsA info-2Jkxz icon-info-fF5_z"></div>
       </div>
     </div>
-    <img v-if="isDisplay == true && currentFileDetail.isimg == 1" class="img-3Ae3U visible-3w0Lw" style="height: auto; width: auto;
+    <img id="imgDisplay" v-if="isDisplay == true && currentFileDetail.isimg == 1" class="img-3Ae3U visible-3w0Lw" style="height: auto; width: auto;
             max-width: 100%;max-height: 100%" v-bind:src="currentFileDetail.dir + encodeURI(currentFileDetail.savefilename)">
-    <video v-if="isDisplay == true && currentFileDetail.isimg == 0" crossorigin="anonymous" class="img-3Ae3U visible-3w0Lw"
+    <video id="video" v-if="isDisplay == true && currentFileDetail.isimg == 0" crossorigin="anonymous" class="img-3Ae3U visible-3w0Lw"
            controlslist="nodownload"
            style="height: auto; width: auto;max-width: 100%;max-height: 100%" controls>
       <source type="video/mp4"
