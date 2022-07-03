@@ -310,7 +310,8 @@ var fileDetailDisplay = new Vue({
             isRecycle: 0,
             isPublic: 0,
             downLoadTimes: "",
-            isImg: 1
+            isImg: 1,
+            thumbnail: ""
         },
         isDisplay: false,
         isDisplayDetail: false,
@@ -353,6 +354,7 @@ var fileDetailDisplay = new Vue({
             }else {
                 this.curPic = this.curPic - 1;
             }
+            $(".img-3Ae3U").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
             this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
         },
         getNextPic: function () {
@@ -375,6 +377,7 @@ var fileDetailDisplay = new Vue({
             }else {
                 this.curPic = this.curPic + 1;
             }
+            $(".img-3Ae3U").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
             this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
         }
     },

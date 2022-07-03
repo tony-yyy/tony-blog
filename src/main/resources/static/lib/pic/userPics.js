@@ -19,7 +19,8 @@ let vm = new Vue({
                     isrecycle: 0,
                     ispublic: 0,
                     downloadtimes: "",
-                    isimg: 1
+                    isimg: 1,
+                    thumbnail: ""
                 }]
             }],
             currentValue: 0,
@@ -262,7 +263,8 @@ var fileDetailDisplay = new Vue({
             isRecycle: 0,
             isPublic: 0,
             downLoadTimes: "",
-            isImg: 1
+            isImg: 1,
+            thumbnail: ""
         },
         isDisplay: false,
         isDisplayDetail: false,
@@ -300,12 +302,12 @@ var fileDetailDisplay = new Vue({
             }else {
                 this.curPic = this.curPic - 1;
             }
+            // $(".img-3Ae3U").attr("src", "/images/loading1.gif");
+            $(".img-3Ae3U").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
             this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
         },
         getNextPic: function () {
             var dates = vm.sliderInfo.axiosResponse; // 每天的图片
-            console.log(dates[this.curIndex].pics)
-            console.log(dates[this.curIndex].pics.length)
             if (dates[this.curIndex].pics == null) return;
             if (dates[this.curIndex].pics.length - 1 == this.curPic && this.curIndex != dates.length - 1){
                 // 当前图片在当日最后一张，之后还有日期
@@ -322,6 +324,8 @@ var fileDetailDisplay = new Vue({
             }else {
                 this.curPic = this.curPic + 1;
             }
+            $(".img-3Ae3U").attr("src", dates[this.curIndex].pics[this.curPic].dir + dates[this.curIndex].pics[this.curPic].thumbnail);
+            // this.currentFileDetail.saveFileName = dates[this.curIndex].pics[this.curPic].thumbnail;
             this.currentFileDetail = dates[this.curIndex].pics[this.curPic];
         }
     },

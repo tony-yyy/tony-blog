@@ -59,7 +59,7 @@ layui.use(['upload', 'element', 'layer'], function(){
         ,accept: 'file'
         ,method: 'post'
         ,multiple: true
-        ,number: 15
+        ,number: 200
         ,auto: false
         ,bindAction: '#testListAction'
         ,choose: function(obj){
