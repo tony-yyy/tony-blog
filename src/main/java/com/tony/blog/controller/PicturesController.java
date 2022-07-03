@@ -291,9 +291,10 @@ public class PicturesController {
     }
 
     @RequestMapping("/deleteFileByIdCompletely/{fileId}")
-    public String deleteFileByIdCompletely(@PathVariable("fileId") Integer fileId
+    public void deleteFileByIdCompletely(@PathVariable("fileId") Integer fileId
             , HttpServletRequest request
-            , HttpSession session) throws JsonProcessingException {
+            , HttpServletResponse response
+            , HttpSession session) throws IOException {
         Pictures delfile = picturesService.findFileById(fileId);
         //创建删除文件对象
         File file = new File(diskDir, delfile.getSavefilename());
@@ -302,7 +303,7 @@ public class PicturesController {
         if (file.exists())file.delete();
         if (thumbnailFile.exists())file.delete();
         picturesService.deleteFileById(delfile);
-        return "redirect:/";
+        response.sendRedirect("/admin/pictures.html");
     }
 
     /**

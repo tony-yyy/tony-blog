@@ -163,13 +163,13 @@
             max-width: 100%;max-height: 100%" v-bind:src="currentFileDetail.dir + encodeURI(currentFileDetail.savefilename)">
     <video id="video" v-if="isDisplay == true && currentFileDetail.isimg == 0" crossorigin="anonymous" class="img-3Ae3U visible-3w0Lw"
            controlslist="nodownload"
-           style="height: auto; width: auto;max-width: 100%;max-height: 100%" controls>
+           style="pointer-events:auto;height: auto; width: auto;max-width: 100%;max-height: 100%" controls>
       <source type="video/mp4"
               v-bind:src="currentFileDetail.dir + encodeURI(currentFileDetail.savefilename)">
       您的浏览器不支持 HTML5 video 标签。
     </video>
     <!--上一张/下一张 图片-->
-    <div  class="prev-wrap-3I_Fi arrow-container-1c1t_">
+    <div class="prev-wrap-3I_Fi arrow-container-1c1t_">
         <img v-on:click="getPrePic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAbFBMVEUAAABPT09OTk5PT09PT09PT09RUVFmZmZPT09PT09PT09OTk5QUFBRUVFSUlJXV1dOTk5OTk5PT09PT09PT09PT09PT09PT09PT09QUFBPT09OTk7l5eVaWlrLy8tpaWna2tq+vr7R0dHNzc1/YRMnAAAAG3RSTlMA7frF4Ek2B1WvpJljKRwT9efSy7u5i3trQC1ehE6LAAACcklEQVRo3rzVCW7bMBCF4RkuplbL+/bsOGnvf8cWgdECGUYhJY6+C/wApUdStnCrzs3R7hwbw25nj825ugXS1V9qZxBhXH3pScfQNVuM2jbdQIWFqjZIYOoqUDmrlpGM2xWVcT0g0+FK83mLCayfe8h7TLSfc+BDixnagSbqGLNwR1OsLWaza8rmGQWwpzzhhEJOYf4x6x9371CQ65PHyyiKEyftNyhs4ylBZVCcqehH3kCB8T9+3w1UbFY0qmco4X50vw5q3Mieg4UiG+g7J6g60Tc8lHmKWjOUcfwzW6izFNFhAR0JA2MBPIhwi0W04qrEQr5enXssZF90wo+PJ1L5glN6vN3fU8pyUlcIed17RvlK/x0g5HVzyofJv7Ts5pVXEzcsuy8fEMa3HBhSfvftgTQcXuEKgmYXqF7hGoJqFzV9GgwE1S7MEH0PlbrydWwgKHfRfIa3EJS72NJfPQTtLtAT0QWCeheX+Jg0unJQDoJ6F44oGAjqXZhAN0jqXeAWv6jVu6jojAj1Ls7xe0u9i4aOiFDv4kgWEepdWNohw/O9UBc7ckj3vJfqwhEj3a9iXTAZpPvX/T23C/OnezuxARiGQSi6/9adoW3Mw5kgUpQDw4ctzLaaHS52ndgDwp5M9kmwb5EJASZ9mNhT8pYJejbCsKFNjalsMGdWBDNflN3EDDZmKSoT1dvGYaO8IRqIhiEd8U8w8GqJ+GKhZk+MGwqum6L6CJzQhWPMAyh9yM0wZNSIVU2CZK3o3BQs2IxHTgCh7Qjsaeh3A+Z8EOzeg7Ifgfe31RV+FjR2VlK+lnB2147eFq3uqJYNlOlUffABmTujNeqNAu4AAAAASUVORK5CYII="
              class="ico-prev-1ts-Q center-XXODD">
     </div>
