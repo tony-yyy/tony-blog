@@ -170,6 +170,12 @@ var blogView = new Vue({
             headingSelector: 'h1, h2, h3',
         });
 
+/*        $(".js-toc").find("a").click(function(e){
+            e.preventDefault();
+            $("#doc-oc-demo1").offCanvas('close');
+            scrollToId = decodeURI(e.currentTarget.hash).substring(1);
+            return false;
+        })*/
 
     }
 })

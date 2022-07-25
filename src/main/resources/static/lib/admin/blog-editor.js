@@ -72,25 +72,28 @@ var blogEditor = new Vue({
             if (this.blogId != null){
                 // 回显数据
                  await axios.get("/admin/blog/detail/" + this.blogId).then(function (response) {
-                    if (!response.data.error)
+                    if (!response.data.error){
                         blogEditor.$set(blogEditor, "blogDetail", response.data.data);
+                    }
                 })
             }
+            // 请求所有分类
+            await axios.get("/admin/types/all").then(function (response) {
+                blogEditor.$set(blogEditor, "types", response.data);
+                for (let i = 0; i < blogEditor.types.length; i++) {
+                    blogEditor.typesMap[blogEditor.types[i]["id"]] = blogEditor.types[i]["name"];
+                };
+            })
         }
     },
-    created: async function () {
-        // 请求所有分类
-        await axios.get("/admin/types/all").then(function (response) {
-            blogEditor.$set(blogEditor, "types", response.data);
-            for (let i = 0; i < blogEditor.types.length; i++) {
-                blogEditor.typesMap[blogEditor.types[i]["id"]] = blogEditor.types[i]["name"];
-            };
-        })
+    created: function () {
         this.blogId = getUrlParam("blogId")
         this.loadBlog()
+
     },
     updated: function () {
-        this.contentEditor = editormd("md-content", {
+        var _this = this;
+        const ce = editormd("md-content", {
             width   : "100%",
             height  : 640,
             syncScrolling : "single",
@@ -103,6 +106,7 @@ var blogEditor = new Vue({
                 initPasteDragImg(this);
             }
         });
+        _this.contentEditor = ce;
     }
 })
 

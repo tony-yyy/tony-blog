@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="lib/tocbot/tocbot.css" >
   <link rel="stylesheet" href="css/me.css" >
   <link rel="stylesheet" href="css/timeline.css" >
-<!--  <link rel="stylesheet" href="css/element-ui.css">
-  <link rel="stylesheet" href="css/amazeui.min.css">-->
+<!--  <link rel="stylesheet" href="css/element-ui.css">-->
+<!--  <link rel="stylesheet" href="css/amazeui.min.css">-->
   <script src="lib/jquery-3.2.1/jquery-3.2.1.min.js" ></script>
 <!--  <base href="/">-->
 
@@ -187,10 +187,10 @@
 </div>
 
 
-<!-- 侧边栏内容
-<div id="doc-oc-demo1" class="am-offcanvas">
+<!-- 侧边栏内容-->
+<!--<div id="doc-oc-demo1" class="am-offcanvas">
   <div class="am-offcanvas-bar">
-    <div class="am-offcanvas-content js-toc">
+    <div class="am-offcanvas-content js-toc" style="margin-top: 50px">
 
     </div>
   </div>
@@ -209,8 +209,8 @@
 <br>
 <div id="bottomBar"></div>
 <script src="lib/vue/vuejs-2.5.16.js" type="text/javascript"></script>
-<!--<script src="lib/amazeui/amazeui.min.js" type="text/javascript"></script>
-<script src="lib/pic/element-ui.js"></script>-->
+<!--<script src="lib/amazeui/amazeui.min.js" type="text/javascript"></script>-->
+<script src="lib/pic/element-ui.js"></script>
 <script src="lib/vue/axios-0.18.0.js" type="text/javascript"></script>
 <script src="lib/semantic/dist/semantic.min.js"></script>
 <script src="lib/scrollTo/jquery.scrollTo.min.js"></script>
@@ -259,7 +259,7 @@
         $(window).scrollTo(0,500);
     });
 
-
+  var scrollToId = ""
     var waypoint = new Waypoint({
         element: document.getElementById('waypoint'),
         handler: function(direction) {
@@ -268,6 +268,11 @@
             } else {
                 $('#toolbar').hide(500);
             }
+          console.log(scrollToId)
+          if (scrollToId != ""){
+            document.getElementById(scrollToId).scrollIntoView()
+            scrollToId = "";
+          }
             console.log('Scrolled to waypoint!  ' + direction);
         }
     })
@@ -300,7 +305,6 @@
             }
         }
     });
-
 
 
 
