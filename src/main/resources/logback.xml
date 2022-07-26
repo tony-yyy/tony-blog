@@ -5,7 +5,15 @@
     <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
 
     <!-- 定义日志存储的路径，不要配置相对路径 -->
-    <property name="FILE_PATH" value="D:/logs/springboot-demo03/demo.%d{yyyy-MM-dd}.%i.log" />
+<!--    <property name="FILE_PATH" value="D:/logs/springboot-demo03/demo.%d{yyyy-MM-dd}.%i.log" />-->
+
+    <!-- 路径名称 -->
+    <property name="log.base" value="logs" />
+    <!-- 保存的文件名 -->
+    <property name="log.fileName" value="log" />
+
+    <property name="LOG_HOME" value="logs" />
+
 
     <!-- 控制台输出日志 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -19,7 +27,7 @@
     <appender name="FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${FILE_PATH}</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/%d{yyyy-MM-dd_HH}.%i.log</fileNamePattern>
             <!-- keep 15 days' worth of history -->
             <maxHistory>15</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">

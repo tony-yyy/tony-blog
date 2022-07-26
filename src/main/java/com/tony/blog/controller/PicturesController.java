@@ -13,6 +13,7 @@ import net.coobird.thumbnailator.tasks.UnsupportedFormatException;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.apache.velocity.shaded.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +43,9 @@ import java.util.zip.ZipOutputStream;
 @RestController
 @RequestMapping(value = "/pictures", produces = "application/json;charset=UTF-8")
 public class PicturesController {
-    public final static String diskDir = "D:\\cloudDisk\\files\\";
+    @Value("${resourceHandlers.file.location}")
+    public String diskDir;
+//    public final static String diskDir = "D:\\cloudDisk\\files\\"; // windows
 //    public final static String diskDir = "/usr/cloudDisk/files/"; // linux
 
     @Autowired
@@ -138,7 +141,7 @@ public class PicturesController {
             Integer fileId = Integer.valueOf(String.valueOf(obj));
             Pictures delfile = picturesService.findFileById(fileId);
             //创建删除文件对象
-            File file = new File(diskDir, delfile.getSavefilename());
+            File file = new File(this.diskDir, delfile.getSavefilename());
             //进行删除
             if (file.exists())file.delete();
             picturesService.deleteFileById(delfile);
@@ -169,7 +172,7 @@ public class PicturesController {
             // 缩略图名字
             String thumbnail = "270x270" + saveFileName;
             //设置文件上传路径
-            String path = diskDir;
+            String path = this.diskDir;
 //            /cloudDisk/file/
             //获取文件大小(单位kb)
             float size = (((float)file.getSize())/1024);
@@ -233,7 +236,7 @@ public class PicturesController {
         //获取文件信息
         Pictures myfile = picturesService.findFileById(fileId);
         //获取文件的路径
-        String path = diskDir;
+        String path = this.diskDir;
         //获取文件输入流
         FileInputStream inputStream = new FileInputStream(new File(path,myfile.getSavefilename()));
         //附件下载（不设置为默认在线打开）
@@ -270,7 +273,7 @@ public class PicturesController {
             //获取文件信息
             Pictures myfile = picturesService.findFileById(id);
             //获取文件的路径
-            String path = diskDir;
+            String path = this.diskDir;
             //创建文件对象
             File file = new File(path,myfile.getSavefilename());
 
@@ -297,8 +300,8 @@ public class PicturesController {
             , HttpSession session) throws IOException {
         Pictures delfile = picturesService.findFileById(fileId);
         //创建删除文件对象
-        File file = new File(diskDir, delfile.getSavefilename());
-        File thumbnailFile = new File(diskDir, delfile.getThumbnail());
+        File file = new File(this.diskDir, delfile.getSavefilename());
+        File thumbnailFile = new File(this.diskDir, delfile.getThumbnail());
         //进行删除
         if (file.exists())file.delete();
         if (thumbnailFile.exists())file.delete();

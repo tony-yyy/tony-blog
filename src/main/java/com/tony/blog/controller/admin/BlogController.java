@@ -10,6 +10,7 @@ import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
@@ -20,7 +21,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/admin", produces = "application/json;charset=utf-8")
 public class BlogController {
-    public static String filePath = "D:\\cloudDisk\\markdown\\";
+    @Value("${resourceHandlers.markdown.location}")
+    public String filePath;
+//    public static String filePath = "D:\\cloudDisk\\markdown\\"; // windows
 //    public static String filePath = "/usr/cloudDisk/markdown/"; // linux
 
     Logger logger = LoggerFactory.getLogger(BlogController.class);
@@ -39,7 +42,7 @@ public class BlogController {
             String saveFileName = new SimpleDateFormat("yyyyMMddHHmmss")
                     .format(new Date()) +"_"+ UUID.randomUUID().toString()
                     .replace("-","").substring(0, 8) +"_"+ realFileName;
-            File filePath = new File(BlogController.filePath);
+            File filePath = new File(this.filePath);
             if (!filePath.exists()) {
                 filePath.mkdirs();
             }

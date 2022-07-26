@@ -40,15 +40,14 @@ mybatis-plus:
 server:
   port: 8511
 logging:
-  config: E:\learning\Java\large-projects\tony-blog\src\main\resources\logback.xml
+  config: src\main\resources\logback.xml
   level:
     com.tony.blog: trace
-
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/tonyblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
-    password: ...
+    password: 123
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #Spring Boot 默认是不注入这些属性值的，需要自己绑定
@@ -71,6 +70,23 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+# windows
+resourceHandlers:
+  file:
+    resource: /cloudDisk/file/**
+    location: D:\\cloudDisk\\files\\
+  markdown:
+    resource: /cloudDisk/markdown/**
+    location: D:\\cloudDisk\\markdown\\
+
+# linux
+#resourceHandlers:
+#  file:
+#    resource: /cloudDisk/file/**
+#    location: /usr/cloudDisk/files/
+#  markdown:
+#    resource: /cloudDisk/markdown/**
+#    location: /usr/cloudDisk/markdown/
 ```
 管理员登录
 

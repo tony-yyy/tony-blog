@@ -2,6 +2,7 @@ package com.tony.blog.config;
 
 
 import com.tony.blog.utils.Md5Utils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,17 +14,33 @@ import java.nio.charset.StandardCharsets;
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
 
+    @Value("${resourceHandlers.file.resource}")
+    String fileHandlerResource;
+    @Value("${resourceHandlers.file.location}")
+    String fileHandlerLocation;
+
+    @Value("${resourceHandlers.markdown.resource}")
+    String markdownHandlerResource; // markdown虚拟路径
+    @Value("${resourceHandlers.markdown.location}")
+    String markdownHandlerLocation; // markdown本地资源路径
+
     //设置文件虚拟路径映射
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(fileHandlerResource).addResourceLocations("file:" + fileHandlerLocation);
+        registry.addResourceHandler(markdownHandlerResource).addResourceLocations("file:" + markdownHandlerLocation);
+
+        // linux
        /* registry.addResourceHandler("/cloudDisk/file/**").addResourceLocations("file:/usr/cloudDisk/files/");
         registry.addResourceHandler("/cloudDisk/phonePhotos/**").addResourceLocations("file:/usr/cloudDisk/phonePhotos/");
         registry.addResourceHandler("/cloudDisk/avatar/**").addResourceLocations("file:/usr/cloudDisk/avatar/");
         registry.addResourceHandler("/cloudDisk/markdown/**").addResourceLocations("file:/usr/cloudDisk/markdown/");*/
-        registry.addResourceHandler("/cloudDisk/file/**").addResourceLocations("file:D:\\cloudDisk\\files\\");
+
+        // windows
+        /*registry.addResourceHandler("/cloudDisk/file/**").addResourceLocations("file:D:\\cloudDisk\\files\\");
         registry.addResourceHandler("/cloudDisk/phonePhotos/**").addResourceLocations("file:G:\\cloudDisk\\phonePhotos\\");
         registry.addResourceHandler("/cloudDisk/avatar/**").addResourceLocations("file:D:\\cloudDisk\\avatar\\");
-        registry.addResourceHandler("/cloudDisk/markdown/**").addResourceLocations("file:D:\\cloudDisk\\markdown\\");
+        registry.addResourceHandler("/cloudDisk/markdown/**").addResourceLocations("file:D:\\cloudDisk\\markdown\\");*/
     }
 
 
