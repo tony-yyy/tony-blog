@@ -77,7 +77,7 @@ CREATE TABLE `pictures` (
   `ext` varchar(20) DEFAULT NULL COMMENT '扩展名',
   `dir` varchar(100) NOT NULL COMMENT '存储目录',
   `size` float(11,1) DEFAULT NULL COMMENT '大小（字节）',
-  `type` varchar(20) NOT NULL COMMENT '类型',
+  `type` varchar(100) NOT NULL COMMENT '类型',
   `uploadTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '上传时间',
   `changeTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更改时间',
   `isRecycle` int(1) DEFAULT '0' COMMENT '是否进回收站',

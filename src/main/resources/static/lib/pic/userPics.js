@@ -331,6 +331,31 @@ var fileDetailDisplay = new Vue({
                 document.getElementById("video").load();
         }
     },
+    filters: {
+        formatTimer: function(value) {
+            let date = new Date(value);
+            let y = date.getFullYear();
+            let MM = date.getMonth() + 1;
+            let week_day = date.getDay();
+            MM = MM < 10 ? "0" + MM : MM;
+            let d = date.getDate();
+            d = d < 10 ? "0" + d : d;
+            var dw = "";
+            switch (week_day) {
+                case 1: dw = "一"; break;
+                case 2: dw = "二"; break;
+                case 3: dw = "三"; break;
+                case 4: dw = "四"; break;
+                case 5: dw = "五"; break;
+                case 6: dw = "六"; break;
+                case 0: dw = "日"; break;
+            }
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            return y + "年" + MM + "月" + d + "日" + "周" + dw  + " " + hours + ":" + minutes + ":" + seconds;
+        }
+    },
 })
 
 $("#album").bind('scroll',album.lazyEvent);//监听页面滚动事件

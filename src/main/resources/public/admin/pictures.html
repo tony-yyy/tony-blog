@@ -229,11 +229,11 @@
         </div>
         <div class="item-1nnwt">
           <label class="title-2M2Fe">上传时间：</label>
-          <div class="value-1DRRi" >{{ currentFileDetail.uploadtime }}</div>
+          <div class="value-1DRRi" >{{ currentFileDetail.uploadtime | formatTimer }}</div>
         </div>
         <div class="item-1nnwt">
           <label class="title-2M2Fe">修改时间：</label>
-          <div class="value-1DRRi" >{{ currentFileDetail.changetime }}</div>
+          <div class="value-1DRRi" >{{ currentFileDetail.changetime | formatTimer }}</div>
         </div>
         <div class="item-1nnwt">
           <label class="title-2M2Fe">文件大小：</label>
