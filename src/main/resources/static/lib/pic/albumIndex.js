@@ -317,6 +317,7 @@ var fileDetailDisplay = new Vue({
         isDisplayDetail: false,
         curIndex: 0,// 当前图片日期索引
         curPic: 0, // 当前图片所在当日中的索引
+        host: window.location.host
     },
     methods: {
         closeDetail: function () {
@@ -336,6 +337,15 @@ var fileDetailDisplay = new Vue({
         },
         closeInfoDetail: function () {
             this.isDisplayDetail = false
+        },
+        copyToClip: function(content) {
+            var aux = document.createElement("input");
+            aux.setAttribute("value", content);
+            document.body.appendChild(aux);
+            aux.select();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
+            alert("复制成功！");
         },
         getPrePic: function() {
             var dates = vm.sliderInfo.axiosResponse; // 每天的图片

@@ -255,6 +255,12 @@
           <label class="title-2M2Fe">文件类型：</label>
           <div class="value-1DRRi" >{{ currentFileDetail.type }}</div>
         </div>
+        <div class="item-1nnwt">
+          <label class="title-2M2Fe">下载链接：</label>
+          <div class="value-1DRRi"><a v-on:click="copyToClip(host + '/pictures/downloadFile/' + currentFileDetail.id)">复制 </a>
+            {{ host }}/pictures/downloadFile/{{ currentFileDetail.id }}
+          </div>
+        </div>
         <img v-on:click="closeInfoDetail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHwAAAB8CAMAAACcwCSMAAAAXVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9RKvvlAAAAHnRSTlMAgAZFcxcDt3lvMUk8UvY2+GcRXyQdLClaVkoLr8dYaj3uAAAD+0lEQVRo3ryY6bLiIBCFm3UEYTKQzeWW7/+YE4xOe51KLumA51dMIV8vh04VQJOOfTfaxrnGjl0fNXxGurfiZNibzEnYvm4IWrnTgS3qcHKqUgC68y9gE9qzvwhx8ec2mJcAfFeer47yifVuUBy+iavB+WcI8qiKJm3DY19vIywqWv+IMNhS6fNGzmSRkZESj8UNL4F2Enu5xRvS7cYPEjfaGrAc9tmsvVus0Ztd0tzt1yp6xcU9fqtpJr1nLzgxbYP/psduSMk3WLd9XWu2h31OFrewUzYZ/8wJJQ8RdiuGzaXvU8AXDQWkL6mEPWRrnNiHEQpp2LSbTQdMQTGpdOgy7eNSlyIUVEwOcrl5hysU1TXk5T6m082hsHg68WOOzwOH4uLhZ8+riW2uUEFXM9HVanzTChmhiqJkzKzV9IzRlRRW9bz+LRmgmoa1r4xKMxUqKk1atdzwoKGidFhsu5gaHqGq4tR2sVR0C5VlFwrfMtYWRmVTBoypphQeKBSX2I06QmfJd885fFdLmKX7/5WFj8himjjbjIaPSJu3OaclvqgnTFRqQFn8XV/6rcUBTVBTaO7w7fAdOHxM/PA6Uo6MefigPGPH1yZ0kKHjF9+xAtXNFsPnHPaf2y++cwVmi1UQeewb7k1YgRL/+qxT//PYuDdtxavD9fNJws/6ut1w7xX27XfGuJLPfF2e1/kvpK+yRZ7fHSSdcODk0ulsHKmnZ8sjUOh0NsRH03vGDACBTmCjDGP9XAEPNDqdDX7utUi9p9Hp7ORyMfttABqdzoZhdpzBEUOgE9mg7k7TjDEONDqdDXzCaohodgKdwEa7x3TSApDpZDaEdNY6xlog0z2VDW36qo54XUCg36jsdAky4owh0IlsnDIN3kYQ6Mgm3FI086gh0unsebCS4eD/Vm8GOQjDMBCsyp1+gP7/m5zQoB6QmaSOfeMQdUTVOPF69wM/dwsXr526xo5zr50PTrChuw+OrWbY0NVWU0WGunZCF0WG8mrYj69KK8orB4thb5ugc7BwpCq2oXOkcpkwbEPnMsE1yrAVnWsUF0jBtnQukFQZwTZ0agxNg2A7Ok0D7ZJgOzrtEo2iYCs6jSItsmA7Oi0y4oBgWzriQFwWecH+TX8eMVkkIgjxbNhuxVUQQgqL0HmyW3GVwvgdofNku4J/+6/8uR+jK5A/awi/CyTvKmJ//pijyoAnfbRVZ6iXPM6sNMjNHGFXG96n2RbqGTaWWVUw6WgDYMxwdtS0JyUYs6pa0u4241W2Id5pwKxuPV1ousVuzME3xW7cw2g932Lex1w/NVbQLVAxK0rSMUQzHh/qHJwaiYy1D8uNxQTbByRHo6HNQ7Gz48BvPM1n0RkY+skAAAAASUVORK5CYII=" class="ico-close-2bHVg"></div>
     </div>
   </div>

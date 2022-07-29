@@ -62,8 +62,8 @@ public class PicturesController {
     @RequestMapping("/picturesDates")
     @ResponseBody()
     public List<PicturesDates> picturesDates(HttpSession session){
-        Long uid = (Long) session.getAttribute("USER_ID");
-        System.out.println(uid);
+/*        Long uid = (Long) session.getAttribute("USER_ID");
+        System.out.println(uid);*/
         List<PicturesDates> picturesDates = picturesService.getPicturesDates(0);
         return picturesDates;
     }
@@ -235,6 +235,8 @@ public class PicturesController {
     public void downloadFile(@PathVariable("fileId") Integer fileId, HttpServletResponse response, HttpSession session) throws Exception {
         //获取文件信息
         Pictures myfile = picturesService.findFileById(fileId);
+        Long uid = (Long) session.getAttribute("USER_ID");
+        if (myfile.getIspublic() == 0 && uid == null) response.sendRedirect("/");
         //获取文件的路径
         String path = this.diskDir;
         //获取文件输入流
@@ -253,6 +255,7 @@ public class PicturesController {
 
     @RequestMapping(value = "/downloadFiles",  produces = "application/json;charset=UTF-8")
     public void downloadFiles(int[] fileIds, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+        Long uid = (Long) session.getAttribute("USER_ID");
         //生成日期对象
         Date current_date = new Date();
         //设置日期格式化样式为：yyyy-MM-dd
@@ -272,6 +275,7 @@ public class PicturesController {
         for (Integer id : fileIds) {
             //获取文件信息
             Pictures myfile = picturesService.findFileById(id);
+            if (myfile.getIspublic() == 0 && uid == null) response.sendRedirect("/");
             //获取文件的路径
             String path = this.diskDir;
             //创建文件对象
