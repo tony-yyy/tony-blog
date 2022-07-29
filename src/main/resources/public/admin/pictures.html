@@ -130,21 +130,27 @@
             <img v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 1): true" class="uk-overlay-scale uk-thumbnail-medium"
                  :style='[{height: "160px"},{backgroundSize: "cover"},{backgroundPosition: "center"},
                               {backgroundImage: `url("` + encodeURI((day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].dir + (day.pics[pic - 1].thumbnail == null? day.pics[pic - 1].savefilename: day.pics[pic - 1].thumbnail)): "") + `")`}]'/>
-            <video v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 0): false" class="uk-overlay-scale uk-thumbnail-medium" crossorigin="anonymous"
+            <video v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 0 && day.pics[pic - 1].type.startsWith('video')): false" class="uk-overlay-scale uk-thumbnail-medium" crossorigin="anonymous"
                    controlslist="nodownload" preload="Metadata" style="height: 160px;
                        background-size: cover; background-position: center; background-image: url('images/playBg.png')">
               <source :src="day.pics != null && pic - 1 < day.pics.length? (day.pics[pic - 1].dir + day.pics[pic - 1].savefilename): ''"
                       type="video/mp4">
               您的浏览器不支持 HTML5 video 标签。
             </video>
+            <img v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 0 && !day.pics[pic - 1].type.startsWith('video')): false" class="uk-overlay-scale uk-thumbnail-medium"
+                 :style='[{height: "160px"},{backgroundSize: "cover"},{backgroundPosition: "center"},
+                              {backgroundImage: "url(images/fileBg.png)"}]'/>
             <figcaption class="uk-overlay-panel uk-overlay-background
                 uk-overlay-bottom uk-overlay-slide-bottom" style="padding-right: 0px;padding-bottom: 0px;">
               <div class="unselected">
-                <svg v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 0): false" style="margin-left: 10px" t="1654348739351" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                <svg v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 0 && day.pics[pic - 1].type.startsWith('video')): false" style="margin-left: 10px" t="1654348739351" class="icon" viewBox="0 0 1024 1024" version="1.1"
                      xmlns="http://www.w3.org/2000/svg" p-id="5839" width="20" height="20"><path d="M960.43008 332.778496l-133.021696 45.024256L827.408384 260.871168c0-23.40352-18.967552-42.376192-42.372096-42.376192l-114.55488 0L253.991936 218.494976 73.79968 218.494976c-23.40352 0-42.376192 18.971648-42.376192 42.376192l0 349.394944 0 132.69504-0.556032 24.56064c0 23.399424 18.971648 42.376192 42.376192 42.376192L555.39712 809.897984l229.640192 0c23.40352 0 42.372096-18.975744 42.372096-42.376192l0-14.076928 0-66.9952 133.021696 45.02016c23.40352 0 42.376192-18.971648 42.376192-42.372096L1002.807296 375.154688C1002.805248 351.751168 983.8336 332.778496 960.43008 332.778496zM563.525632 531.45088 403.787776 651.986944c-3.692544 2.772992-8.1408 4.202496-12.58496 4.202496-3.182592 0-6.366208-0.735232-9.32352-2.2016-7.07584-3.509248-11.561984-10.77248-11.561984-18.683904L370.317312 401.570816c0-7.790592 4.365312-14.97088 11.298816-18.558976 6.892544-3.550208 15.276032-2.977792 21.6576 1.508352L563.01568 497.717248c5.44256 3.871744 8.70912 10.075136 8.809472 16.720896C571.925504 521.12896 568.84736 527.4112 563.525632 531.45088z" p-id="5840" fill="#ffffff"></path></svg>
                 <a v-on:click="showFileDetail(index, pic - 1)">查看详情</a>
                 <span style="color: #f88080">
                   {{(day.pics != null && pic - 1 < day.pics.length && day.pics[pic - 1].ispublic == 1)?'已公开':''}}
+                </span>
+                <span v-if="(day.pics != null && pic - 1 < day.pics.length)? (day.pics[pic - 1].isimg == 0 && !day.pics[pic - 1].type.startsWith('video')): false">
+                  : {{ day.pics[pic - 1].realfilename }}
                 </span>
                 <!--v-on:click="getImgDetail($index, $pic)"-->
                 <svg v-on:click="selectFile(index, pic - 1)" style="float: right; cursor: pointer" t="1654392379803" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -203,13 +209,15 @@
     </div>
     <img id="imgDisplay" v-if="isDisplay == true && currentFileDetail.isimg == 1" class="img-3Ae3U visible-3w0Lw" style="height: auto; width: auto;
             max-width: 100%;max-height: 100%" v-bind:src="currentFileDetail.dir + encodeURI(currentFileDetail.savefilename)">
-    <video id="video" v-if="isDisplay == true && currentFileDetail.isimg == 0" crossorigin="anonymous" class="img-3Ae3U visible-3w0Lw"
+    <video id="video" v-if="isDisplay == true && currentFileDetail.isimg == 0 && currentFileDetail.type.startsWith('video')" crossorigin="anonymous" class="img-3Ae3U visible-3w0Lw"
            controlslist="nodownload"
            style="pointer-events:auto; height: auto; width: auto;max-width: 100%;max-height: 100%" controls>
       <source type="video/mp4"
               v-bind:src="currentFileDetail.dir + encodeURI(currentFileDetail.savefilename)">
       您的浏览器不支持 HTML5 video 标签。
     </video>
+    <img v-if="isDisplay == true && currentFileDetail.isimg == 0 && !currentFileDetail.type.startsWith('video')" class="img-3Ae3U visible-3w0Lw" style="height: auto; width: auto;
+            max-width: 100%;max-height: 100%" src="images/fileBg.png">
     <div class="prev-wrap-3I_Fi arrow-container-1c1t_">
         <img v-on:click="getPrePic"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAbFBMVEUAAABPT09OTk5PT09PT09PT09RUVFmZmZPT09PT09PT09OTk5QUFBRUVFSUlJXV1dOTk5OTk5PT09PT09PT09PT09PT09PT09PT09QUFBPT09OTk7l5eVaWlrLy8tpaWna2tq+vr7R0dHNzc1/YRMnAAAAG3RSTlMA7frF4Ek2B1WvpJljKRwT9efSy7u5i3trQC1ehE6LAAACcklEQVRo3rzVCW7bMBCF4RkuplbL+/bsOGnvf8cWgdECGUYhJY6+C/wApUdStnCrzs3R7hwbw25nj825ugXS1V9qZxBhXH3pScfQNVuM2jbdQIWFqjZIYOoqUDmrlpGM2xWVcT0g0+FK83mLCayfe8h7TLSfc+BDixnagSbqGLNwR1OsLWaza8rmGQWwpzzhhEJOYf4x6x9371CQ65PHyyiKEyftNyhs4ylBZVCcqehH3kCB8T9+3w1UbFY0qmco4X50vw5q3Mieg4UiG+g7J6g60Tc8lHmKWjOUcfwzW6izFNFhAR0JA2MBPIhwi0W04qrEQr5enXssZF90wo+PJ1L5glN6vN3fU8pyUlcIed17RvlK/x0g5HVzyofJv7Ts5pVXEzcsuy8fEMa3HBhSfvftgTQcXuEKgmYXqF7hGoJqFzV9GgwE1S7MEH0PlbrydWwgKHfRfIa3EJS72NJfPQTtLtAT0QWCeheX+Jg0unJQDoJ6F44oGAjqXZhAN0jqXeAWv6jVu6jojAj1Ls7xe0u9i4aOiFDv4kgWEepdWNohw/O9UBc7ckj3vJfqwhEj3a9iXTAZpPvX/T23C/OnezuxARiGQSi6/9adoW3Mw5kgUpQDw4ctzLaaHS52ndgDwp5M9kmwb5EJASZ9mNhT8pYJejbCsKFNjalsMGdWBDNflN3EDDZmKSoT1dvGYaO8IRqIhiEd8U8w8GqJ+GKhZk+MGwqum6L6CJzQhWPMAyh9yM0wZNSIVU2CZK3o3BQs2IxHTgCh7Qjsaeh3A+Z8EOzeg7Ifgfe31RV+FjR2VlK+lnB2147eFq3uqJYNlOlUffABmTujNeqNAu4AAAAASUVORK5CYII="
              class="ico-prev-1ts-Q center-XXODD">

@@ -301,10 +301,12 @@ public class PicturesController {
         Pictures delfile = picturesService.findFileById(fileId);
         //创建删除文件对象
         File file = new File(this.diskDir, delfile.getSavefilename());
-        File thumbnailFile = new File(this.diskDir, delfile.getThumbnail());
+        if (delfile.getThumbnail() != null){
+            File thumbnailFile = new File(this.diskDir, delfile.getThumbnail());
+            if (thumbnailFile.exists())file.delete(); // 删除缩略图
+        }
         //进行删除
         if (file.exists())file.delete();
-        if (thumbnailFile.exists())file.delete();
         picturesService.deleteFileById(delfile);
         response.sendRedirect("/admin/pictures.html");
     }
